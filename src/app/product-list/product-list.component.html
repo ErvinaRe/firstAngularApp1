@@ -1,0 +1,53 @@
+<h1>Products</h1>
+<h3>{{ date | date : "dd.MM.yyyy HH:mm" }}</h3>
+
+<button
+  type="button"
+  class="btn btn-danger"
+  type="button"
+  (click)="toggleImage()"
+>
+  {{ showImage == true ? "Hide" : "Show" }}
+</button>
+
+<button type="button" class="btn btn-danger" (click)="resizeImage()">
+  Uvecaj
+</button>
+<div class="row" style="margin-top: 30px; margin-bottom: 20px">
+  <div class="col-lg-3">
+    <label>Filter</label>
+  </div>
+</div>
+<div class="col-lg-3">
+  <input type="text" class="form-control" />
+</div>
+<div>
+  <table class="table table-striped">
+    <thead>
+      <th>Slika</th>
+      <th>Product name</th>
+      <th>Product code</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Rating</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>
+          <img
+            *ngIf="showImage"
+            [src]="product.imageUrl"
+            [title]="product.productName"
+            [style.width.px]="width"
+            [style.border-radius.%]="imageRadius"
+          />
+        </td>
+        <td>{{ product.productName | uppercase }}</td>
+        <td>{{ product.productCode | lowercase }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.price | currency : "USD" : "symbol" : "1.2-2" }}</td>
+        <td>{{ product.rating | number : "1.2-2" }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
